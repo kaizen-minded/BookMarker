@@ -12,9 +12,11 @@ function NavBar() {
                     <div className="white-bar"></div>
                 </label>
                 <div className="left-menu">
-                   <p>Home</p>
-                   <p>Sign Up</p>
-                   <p>Login</p>
+                    <ul>
+                        <li>Home</li>
+                        <li>Sign Up</li>
+                        <li>Login</li>
+                    </ul>
                 </div>
                 <h1 className="logo">BookMarker</h1>
             </nav>
