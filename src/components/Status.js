@@ -1,20 +1,24 @@
 import React from 'react';
 import './Status.css';
 
-function Status(){
+function Status(props){
     return(
-        <div className="">
+        <div className="status-box">
+            <label>Find more books</label>
+            <input type="text" />
+
+            <h3>Stats</h3>
             <div className="">
                 <h3>Currently Reading</h3>
-                <p>3 books</p>
+                <p>{props.current} books</p>
             </div>
             <div className="">
                 <h3>Books in Wishlist</h3>
-                <p>13 books</p>
+                <p>{props.wishlist} books</p>
             </div>
             <div className="">
                 <h3>Completed Books</h3>
-                <p>5 books</p>
+                <p>{props.completed} books</p>
             </div>
 
         </div>
