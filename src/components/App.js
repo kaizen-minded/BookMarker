@@ -1,38 +1,45 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
+import fetchBooksByStatus from '../actions/index'
+import store from '../store';
+
 import NavBar from './Navbar';
-import BookMarker from './BookMarker';
+import BookList from './BookList';
 import Status from './Status';
+import SearchBooks from './SearchBooks'
+
 import './App.css';
+import ActiveBook from './ActiveBook';
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      books: [
+      routes: [
         {
-          image:"../images/harry.jpg",
-          title: "Half Blood Prince",
-          author: "J.K Rowling",
-          summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+          path: "/home",
+          title: "Currently Reading",
+          status: "Current"
         },
         {
-          image:"../images/potter.jpg",
-          title: "Sorcerer's Stone",
-          author: "J.K Rowling",
-          summary:"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam"
+          path: "/wishlist",
+          title: "Will Read",
+          status: "Wishlist"
         },
         {
-          image:"../images/harry-potter.jpg",
-          title:"Deathly Hallows",
-          author:"J.K Rowling",
-          summary:"Blah Blah Blah"
+          path: "/completed",
+          title: "Books I have finished",
+          status: "Completed"
         }
       ]
     }
   }
+
   render() {
     const styles = {
-      float:"right",
+      float: "right",
       width: "80%"
     }
     const statusStyles = {
@@ -41,19 +48,35 @@ class App extends Component {
       float: "left"
     }
     return (
-      <div className="App">
-        <NavBar />
-
-        <main style={styles}className="">
-          <BookMarker data={this.state.books}/>
-        </main>
-        <aside style={statusStyles}>
-          <Status current={4} wishlist={3} completed={15}/>
-        </aside>
-        
-      </div>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <NavBar />
+            <main style={styles} className="">
+              {this.state.routes.map(({ path, status, title }) => (
+                <Route
+                  path={path}
+                  render={(props) => <BookList {...props} status={status} title={title} data={this.state.books} />}
+                />
+              ))}
+              <Route path="/search" component={SearchBooks} />
+              <Route path="/book/:id" component={ActiveBook} />
+            </main>
+            <aside style={statusStyles}>
+              <Status current={4} wishlist={3} completed={15} />
+            </aside>
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }
 
-export default App;
+// const mapStateToProps = state => ({
+//   books: state.bookList.books,
+//   loading: state.loading,
+//   error: state.error
+// } )
+
+// export default connect(mapStateToProps)(App);
+export default App
