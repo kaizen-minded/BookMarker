@@ -1,0 +1,120 @@
+.container {
+    display: flex;
+    background: rgba(245, 245, 245, .6);
+    /* margin: 20px auto; */
+    min-height: 100vh;
+    flex-direction: column;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container h1{
+    margin: 15px auto;
+    text-align: center;
+    flex: 1 1 100%;
+    max-height: 75px;
+}
+
+.book-display{
+    border-top: 3px solid royalblue;
+    padding: 10px;
+    text-align: left;
+}
+
+.book-display h2{
+    display: inline-block;
+}
+.book-display p{
+    /* display: inline-block; */
+}
+.book-cover{
+    /* display: block; */
+    /* margin: 15px auto; */
+    float: left;
+    width: 157px;
+    margin-right: 13px;
+}
+
+.book-display h3 {
+    font-size: 1.9em;
+}
+
+input[type="submit"]{
+    margin-left: 7px;
+    background: royalblue;
+    color: whitesmoke;
+    border-radius: 5px;
+    border-color: royalblue;
+    width: 75px;
+    font-weight: 900;
+}
+
+.details-btn{
+    border: 2px solid royalblue;
+    border-radius: 5px;
+    padding-bottom: 15px;
+    color: royalblue;
+    width: 50%;
+    min-width: 157px;
+    background: transparent;
+    height: 26px;
+    margin: 10px auto;
+    font-weight: 800; 
+}
+
+.details-btn:hover{
+    background: royalblue;
+    color: whitesmoke;
+}
+
+.delete-btn{
+    width: 50%;
+    min-width: 157px;
+}
+.delete-btn:hover{
+    background: red;
+    color:whitesmoke;
+}
+
+
+@media all and (min-width: 600px){
+    .container{
+        flex-direction: row;
+        flex-flow: wrap;
+    }
+    .book-display{
+        margin: 15px;
+        /* max-height: 400px; */
+    }
+    .book-display h3{
+        font-size: 1em;
+    }
+    .book-display p{
+        display: inline-block;
+        margin: 5px;
+        padding: 10px;
+        border: 1px solid lightgrey;
+    }
+    .book-display button{
+        text-align: center;
+        display: block;
+        text-decoration: none;
+    }
+    .book-display a{
+        text-decoration: none;
+    }
+    .book-cover{
+        display: block;
+        margin: 15px auto;
+        float: none;
+        width: 157px;
+    }
+    .details-btn{
+        width: 100%;
+    }
+
+    .delete-btn{
+        width: 100%;
+    }
+}

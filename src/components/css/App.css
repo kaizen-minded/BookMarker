@@ -22,11 +22,15 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+main {
+  float: right;
+  width: 80%
+}
+
+
+@media only screen and (min-width: 640px){
+  aside {
+    min-height: 100vh;
   }
-  to {
-    transform: rotate(360deg);
-  }
+
 }

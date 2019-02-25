@@ -1,7 +1,7 @@
 import React from 'react';
 import Book from './Book';
 import { connect } from 'react-redux';
-import {  createNewBook } from '../actions/index';
+import {  createNewBook, fetchAllBooks } from '../actions/index';
 import store from "../store";
 
 function SearchList (props) {
@@ -19,7 +19,8 @@ function SearchList (props) {
            status: "Wishlist"
         }
         console.log(newBook)
-        store.dispatch(createNewBook(newBook))
+        store.dispatch(createNewBook(newBook));
+        store.dispatch(fetchAllBooks());
     }
     const bookSearch = listOfBooks ? listOfBooks.map( book =>{
         return <Book
@@ -34,7 +35,6 @@ function SearchList (props) {
     return(
         <div>
             {bookSearch}
-            <h1>Testing</h1>
         </div>
     )
 }

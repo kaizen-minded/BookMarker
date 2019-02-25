@@ -13,24 +13,29 @@ class Status extends React.Component{
     }
     render(){
         return(
-            <div className="status-box">
-                <Link to="/search">
-                    <button>Find New Books</button>
-                </Link>
-                <h3>Stats</h3>
-                <div className="">
-                    <h3>Currently Reading</h3>
-                    <p>{this.props.bookCount.current} books</p>
-                </div>
-                <div className="">
-                    <h3>Books in Wishlist</h3>
-                    <p>{this.props.bookCount.wishlist} books</p>
-                </div>
-                <div className="">
-                    <h3>Completed Books</h3>
-                    <p>{this.props.bookCount.completed} books</p>
-                </div>
-            </div>
+            <React.Fragment>
+                    <h2 className="header">Book Stats</h2>
+
+                    <div className="status-card">
+                        <h3>Currently Reading</h3>
+                        <p>
+                            <span className="status-number">{this.props.bookCount.current} </span>
+                        </p>
+                    </div>
+                    <div className="status-card">
+                        <h3>Books in Wishlist</h3>
+                        <p>
+                            <span className="status-number">{this.props.bookCount.wishlist} </span>
+                        </p>
+                    </div>
+                    <div className="status-card">
+                        <h3>Completed Books</h3>
+                        <p>
+                            <span className="status-number">{this.props.bookCount.completed} </span>
+                        </p>
+                    </div>
+                
+            </React.Fragment>
         )
     }
     

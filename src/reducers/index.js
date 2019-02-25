@@ -2,10 +2,14 @@ import {
     FETCH_BOOK_REQUEST,
     FETCH_BOOK_SUCCESS,
     FETCH_BOOK_ERROR,
-    ADD_BOOK,
     GET_ALL_BOOKS,
+    GET_STATUS_BOOKS,
+    GET_ONE_BOOK,
+    ADD_BOOK,
     UPDATE_STATUS,
-    DELETE_BOOK
+    DELETE_BOOK,
+    ADD_COMMENT,
+    REMOVE_COMMENT
 } from '../actions/index'
 
 import {
@@ -18,6 +22,7 @@ const initialState = {
     loading: false,
     error: null,
     books: [],
+    oneBook:{},
     bookCount: {}
 }
 
@@ -36,10 +41,24 @@ export default function bookReducer (state=initialState, action){
     }
     else if (action.type === FETCH_BOOK_SUCCESS) {
         return Object.assign({}, state, {
-            books: action.books,
+            oneBook: action.books,
             loading: false,
             error: null
         });
+    }
+    else if (action.type === GET_STATUS_BOOKS){
+        return Object.assign({}, state, {
+            books: action.books,
+            loading: false,
+            error: null
+        })
+    }
+    else if (action.type === GET_ONE_BOOK){
+        return Object.assign({}, state, {
+            oneBook: action.oneBook,
+            loading: false,
+            error: null
+        })
     }
     else if(action.type === ADD_BOOK){
         return Object.assign({}, state, {
@@ -58,18 +77,11 @@ export default function bookReducer (state=initialState, action){
                 return book
             })
         })
-        return state
     }
     else if (action.type === DELETE_BOOK){
         console.log("REACHED DELETE REDUCERS")
         return Object.assign({}, state, {
             books: state.books.filter(({ bookId }) => bookId !== action.bookId)
-            // books: state.books.filter(book => {
-            //     if(book.bookId !== action.bookId){
-            //         return book
-            //     }
-            // })
-        // return state.books.filter(({ id }) => id !== action.bookId)
         })
     }
     else if (action.type === GET_ALL_BOOKS){
@@ -80,6 +92,36 @@ export default function bookReducer (state=initialState, action){
                 completed: action.books.filter(({status}) => status === "Completed").length
             }
         })
+    }
+    else if(action.type === ADD_COMMENT){
+        console.log("[ADD_COMMENT Reducer]")
+        return Object.assign({}, state, {
+            books: state.books.map(book => {
+                if(book.bookId === action.bookId){
+                    return {
+                        ...book,
+                        notes: [action.comment, ...book.notes]
+                    }
+                }
+                return book
+            })
+        })
+
+    }
+    else if(action.type ===  REMOVE_COMMENT){
+        console.log("[REMOVE_COMMENT Reducer]")
+        return Object.assign({}, state, {
+            books: state.books.map(book => {
+                if(book.bookId === action.bookId){
+                    return {
+                        ...book,
+                        notes: [action.comments]
+                    }
+                }
+                return book
+            })
+        })
+
     }
 
     return state;

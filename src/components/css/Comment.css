@@ -1,0 +1,26 @@
+.comment-card{
+    margin: auto 15px;
+    border-bottom: 1px solid lightgrey; 
+    width: 100%;
+    max-width: 500px;
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px;
+}
+.comment-card h3{
+    float: left;
+}
+.comment-card h4{
+    float: right;
+    color: hsl(0, 0%, 45%);
+}
+.comment-card p{
+    font-size: 14px;
+    margin-top: 15px;
+    clear: both;
+}
+.comment-card .btn{
+    position: relative;
+    top: 2px;
+    float: right;
+}

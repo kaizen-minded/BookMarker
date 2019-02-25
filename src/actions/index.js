@@ -25,6 +25,18 @@ export const getAllBooks = (books) => ({
     type: GET_ALL_BOOKS,
     books
 })
+export const GET_STATUS_BOOKS = "GET_STATUS_BOOKS";
+export const getStatusBooks = (books) =>({
+    type: GET_STATUS_BOOKS,
+    books
+})
+
+export const GET_ONE_BOOK = 'GET_ONE_BOOK';
+export const getOneBook = (oneBook) => ({
+    type: GET_ONE_BOOK,
+    oneBook
+})
+
 export const UPDATE_STATUS = 'UPDATE_STATUS';
 export const updateStatus = (status, bookId) => ({
     type: UPDATE_STATUS,
@@ -36,11 +48,27 @@ export const deleteBook = (bookId) => ({
     type: DELETE_BOOK,
     bookId
 })
+export const ADD_COMMENT = "ADD_COMMENT";
+export const addComment = (bookId, comment) => ({
+    type: ADD_COMMENT,
+    bookId,
+    comment
+}) 
+export const REMOVE_COMMENT ="REMOVE_COMMENT";
+export const removeComment = (bookId, comments) => ({
+    type: REMOVE_COMMENT,
+    bookId,
+    comments
+})
 
 // fetch(`${API_BASE_URL}/book`)
 
 export const fetchAllBooks = () => dispatch => {
-    return fetch(`/book/allbooks`)
+    return fetch(`/book/allbooks`, {
+        headers: {
+            "Authorization": `Bearer ${localStorage.authToken}`
+        }
+    })
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
@@ -55,7 +83,11 @@ export const fetchAllBooks = () => dispatch => {
 }
 
 const fetchBooksByStatus = (status) => dispatch => {
-    return fetch(`/book/?status=${status}`)
+    return fetch(`/book/?status=${status}`,  {
+        headers: {
+            "Authorization": `Bearer ${localStorage.authToken}`
+        }
+    })
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
@@ -63,14 +95,18 @@ const fetchBooksByStatus = (status) => dispatch => {
             return res.json();
         }).then(book => {
             console.log(book)
-            dispatch(fetchBookSuccess(book));
+            dispatch(getStatusBooks(book));
         }).catch(err => {
             dispatch(fetchBookError(err));
         });
 };
 
 export const fetchOneBook = (id) => dispatch => {
-    return fetch(`/book/${id}`)
+    return fetch(`/book/${id}`,  {
+        headers: {
+            "Authorization": `Bearer ${localStorage.authToken}`
+        }
+    })
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
@@ -78,7 +114,7 @@ export const fetchOneBook = (id) => dispatch => {
             return res.json();
         }).then(book => {
             console.log(book)
-            dispatch(fetchBookSuccess(book));
+            dispatch(getOneBook(book));
         }).catch(err => {
             dispatch(fetchBookError(err));
         });
@@ -91,7 +127,8 @@ export const createNewBook = (newbook) => dispatch => {
         body: JSON.stringify(newbook),
         headers:{
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.authToken}`
           }
     }
     return fetch('/book/create', data)
@@ -117,7 +154,8 @@ export const updateBookStatus = (bookId, status) => dispatch => {
         body: JSON.stringify(bookUpdate),
         headers:{
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.authToken}`
           }
     }
     return fetch(`/book/updatebookstatus/${bookId}`, data)
@@ -136,15 +174,16 @@ export const updateBookStatus = (bookId, status) => dispatch => {
 
 export const removeBook = (bookId) => dispatch => {
     console.log("delete Dispatched");
-    const deleteBook = {
+    const deleteTargetBook = {
         id: bookId
     }
     const data = {
         method: "DELETE",
-        body: JSON.stringify(deleteBook),
+        body: JSON.stringify(deleteTargetBook),
         headers:{
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.authToken}`
           }
     }
     fetch(`/book/deletebook/${bookId}`, data)
@@ -159,6 +198,64 @@ export const removeBook = (bookId) => dispatch => {
             console.log(bookId)
             dispatch(deleteBook(bookId))
         })
+}
+
+export const addNoteToBook = (bookId, bookmarkPage, comment) => dispatch => {
+    const newComment= {
+        id: bookId,
+        bookmarkPage: bookmarkPage,
+        comment: comment
+    }
+    const data = {
+        method: "POST",
+        body: JSON.stringify(newComment),
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.authToken}`
+          }
+    }
+    return fetch(`/book/addcomment/${bookId}`, data)
+        .then(res => {
+            if(!res.ok){
+                return Promise.reject(res.statusText);
+            }
+            return res.json()
+        })
+        .then(updatedComments => {
+            const comment = updatedComments.commentInfo
+            dispatch(addComment(bookId, comment))
+        })
+}
+
+export const removeNoteFromBook =(bookId, commentId) => dispatch => {
+    console.log("[Action Index] removeNoteFromBook");
+    const targetComment = {
+        bookId: bookId,
+        commentId: commentId
+    }
+    const data = {
+        method: "DELETE",
+        body: JSON.stringify(targetComment),
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.authToken}`
+          }
+    }
+    return fetch(`/book/deletecomment/${bookId}`, data)
+    .then(res => {
+        if(!res.ok){
+            return Promise.reject(res.statusText);
+        }
+        return res.json()
+    })
+    .then(updatedComments => {
+        const comment = updatedComments.commentInfo
+        console.log("[Action Index] response from fetch", comment.notes);
+        // dispatch(addComment(bookId, comment))
+        dispatch(removeComment(bookId, comment.notes))
+    })
 }
 
 export default fetchBooksByStatus

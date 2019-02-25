@@ -2,8 +2,10 @@ import React from 'react';
 import SearchForm from './SearchForm';
 import SearchList from './SearchList'
 import { connect } from 'react-redux';
-import fetchGoodreads from '../actions/goodReads'
+import fetchGoodreads from '../actions/goodReads';
 import store from '../store';
+
+import './css/SearchBooks.css';
 
 class SearchBooks extends React.Component {
     constructor(props){
@@ -22,15 +24,15 @@ class SearchBooks extends React.Component {
     handleSubmit(e){
         e.preventDefault();
         console.log(this.state.userSearch)
-        store.dispatch(fetchGoodreads(this.state.userSearch))
+        store.dispatch(fetchGoodreads(this.state.userSearch));
     }
 
     render(){
         return(
-            <div>
+            <section className="container" role="region">
                 <SearchForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} value={this.state.userSearch}/>
                 <SearchList {...this.props.goodreads}/>
-            </div>
+            </section>
             
         )
     }
@@ -40,7 +42,8 @@ const mapStateToProps = state => {
     return {
         loading: state.loading,
         error: state.error,
-        goodreads: state.goodreads
+        goodreads: state.goodreads,
+        books: state.books
     }
 }
 

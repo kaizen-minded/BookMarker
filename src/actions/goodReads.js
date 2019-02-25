@@ -16,7 +16,11 @@ export const fetchGoodReadsError = error => ({
 })
 
 const fetchGoodreads = (userBook) => dispatch => {
-    fetch(`/book/search/${userBook}`).then(res => {
+    fetch(`/book/search/${userBook}`, {
+        headers: {
+            "Authorization": `Bearer ${localStorage.authToken}`
+        }
+    }).then(res => {
         if (!res.ok) {
             return Promise.reject(res.statusText);
         }

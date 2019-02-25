@@ -1,4 +1,38 @@
-.status-box{
+.aside-container{
     background: lightgrey;
-    width: 200px
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+}
+.aside-container > h2{
+    margin: 15px auto;
+    text-align: center;
+    flex: 1 1 100%;
+}
+
+.status-card{
+    padding: 10px;
+    text-align: center;
+    word-wrap: break-word;
+    flex: 1;
+}
+
+.status-number{
+    font-size: 4rem;
+}
+
+
+@media all and (min-width: 600px){
+    .aside-container{
+        flex-flow: column nowrap;
+        max-width: 20%;
+        min-height: 100vh;
+    }
+    .aside-container > h2{
+        text-align: center;
+        flex: 0 0 25px;
+    }
+    .status-card{
+        flex: 0 0 50px;
+    }
 }

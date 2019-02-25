@@ -1,0 +1,80 @@
+.homepage{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.homepage-info{
+    margin-top: 50px;
+    padding: 15px;
+    font-size: 2rem;
+    /* max-width: 800px; */
+    width: 100%;
+    /* flex: 3; */
+    /* text-shadow: 2px 5px rgba(211, 209, 209, .75); */
+}
+
+.homepage-info li{
+    margin: 20px auto;
+    float: none
+}
+.homepage-register{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 50px;
+    padding: 15px;
+    align-items: baseline;
+}
+.homepage-register h2{
+    margin-bottom: 15px;
+}
+.homepage-register label{
+    visibility: hidden;
+}
+.homepage-register input{
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.homepage-register button{
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    margin-top: 29px;
+    cursor: pointer;
+}
+.login-form, .register-form{
+    
+    background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+}
+
+@media all and (min-width: 600px){
+    .homepage{
+        flex-direction: row;
+    }
+    .homepage-register{
+        flex-direction: row;
+    }
+    
+}
