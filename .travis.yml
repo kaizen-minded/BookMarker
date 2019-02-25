@@ -2,4 +2,11 @@ language: node_js
 node_js: node
 cache:
   directories:
-    - node_modules
+  - node_modules
+env:
+- CI=true
+deploy:
+  provider: heroku
+  app: bookmarker-server
+  api_key:
+    secure: wkzJKAD7r/GBd3PfwaGnVhh/UMa8+LmAxLl8zgkg+sOONwxjKtfeDREy8t4WDgspO12tF2b+YQFyAZfT1hfOGNQA4tSSCA5EG3hKFIQJXO+MMJWp6Pfjluoo1JSb2tvadx4gj/uFkfbx6GR6GLpD97U3TGgaRTNEEaiZtLCi/pzm6nGvh2xwlW2KuW8OBs6i9H74ncrIqHEbQqM0i2757vcCS0MbpJ07JDsN71mTCVk7PPXSUkcDPjU+ydKc5MnXOrIYlbjDpiUqTr+AtETxApOOd5f5IQ7LAnJt4PkZl95tQFJYb64c7YAfh1xU5AlJILx0+RqE3wqpKSBRRFq+6+07lS0cbp+2PDwYoHBbwSMqGgcTwWABeM8R8jOJABnFEGvDTto2QVdQesmq/kRdLZ8zA8DCniHbxIVgk9ozfJvumw/55u4WvqxjyyjUvFH+8FJRb5jqze2U8tGl+8Qw63SAWYPF8i0S0XaFKCIcOl9u9isDlX5/7Jx+532S5eigp6+FSrM+vpQmOmsgxnmlCdOS2XWUFlExfk56R7EjyuPIaw+35x+69z0AA9kRlZBnn0N6aHPQpnGrkyXmWle47YvNjxBZ2phtvDSMT9L3cX2VKYtg2Ux+VE2Us71cMQgrDXVkqpEotT1ezEwLcQQOMndHb1906fwbPBSe4hhEq6M=
