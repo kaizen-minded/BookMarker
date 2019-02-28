@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 class Book extends React.Component {
 
@@ -50,12 +49,5 @@ class Book extends React.Component {
         )
     }
 }
-
-Book.PropTypes = {
-    title: PropTypes.string,
-    image: PropTypes.string,
-    page: PropTypes.number,
-}
-
 
 export default Book
