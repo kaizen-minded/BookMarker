@@ -1,3 +1,5 @@
+import {API_BASE_URL} from '../config';
+
 export const FETCH_BOOK_REQUEST = 'FETCH_BOOK_REQUEST';
 export const fetchBookRequest = () =>({
     type: FETCH_BOOK_REQUEST
@@ -64,7 +66,7 @@ export const removeComment = (bookId, comments) => ({
 // fetch(`${API_BASE_URL}/book`)
 
 export const fetchAllBooks = () => dispatch => {
-    return fetch(`/book/allbooks`, {
+    return fetch(`${API_BASE_URL}/book/allbooks`, {
         headers: {
             "Authorization": `Bearer ${localStorage.authToken}`
         }
@@ -83,7 +85,7 @@ export const fetchAllBooks = () => dispatch => {
 }
 
 const fetchBooksByStatus = (status) => dispatch => {
-    return fetch(`/book/?status=${status}`,  {
+    return fetch(`${API_BASE_URL}/book/?status=${status}`,  {
         headers: {
             "Authorization": `Bearer ${localStorage.authToken}`
         }
@@ -102,7 +104,7 @@ const fetchBooksByStatus = (status) => dispatch => {
 };
 
 export const fetchOneBook = (id) => dispatch => {
-    return fetch(`/book/${id}`,  {
+    return fetch(`${API_BASE_URL}/book/${id}`,  {
         headers: {
             "Authorization": `Bearer ${localStorage.authToken}`
         }
@@ -131,7 +133,7 @@ export const createNewBook = (newbook) => dispatch => {
             'Authorization': `Bearer ${localStorage.authToken}`
           }
     }
-    return fetch('/book/create', data)
+    return fetch(`${API_BASE_URL}/book/create`, data)
         .then(res => {
             if(!res.ok){
                 return Promise.reject(res.statusText);
@@ -158,7 +160,7 @@ export const updateBookStatus = (bookId, status) => dispatch => {
             'Authorization': `Bearer ${localStorage.authToken}`
           }
     }
-    return fetch(`/book/updatebookstatus/${bookId}`, data)
+    return fetch(`${API_BASE_URL}/book/updatebookstatus/${bookId}`, data)
         .then(res => {
             if(!res.ok){
                 return Promise.reject(res.statusText);
@@ -186,7 +188,7 @@ export const removeBook = (bookId) => dispatch => {
             'Authorization': `Bearer ${localStorage.authToken}`
           }
     }
-    fetch(`/book/deletebook/${bookId}`, data)
+    fetch(`${API_BASE_URL}/book/deletebook/${bookId}`, data)
         .then(res => {
             if(!res.ok){
                 return Promise.reject(res.statusText);
@@ -215,7 +217,7 @@ export const addNoteToBook = (bookId, bookmarkPage, comment) => dispatch => {
             'Authorization': `Bearer ${localStorage.authToken}`
           }
     }
-    return fetch(`/book/addcomment/${bookId}`, data)
+    return fetch(`${API_BASE_URL}/book/addcomment/${bookId}`, data)
         .then(res => {
             if(!res.ok){
                 return Promise.reject(res.statusText);
@@ -243,7 +245,7 @@ export const removeNoteFromBook =(bookId, commentId) => dispatch => {
             'Authorization': `Bearer ${localStorage.authToken}`
           }
     }
-    return fetch(`/book/deletecomment/${bookId}`, data)
+    return fetch(`${API_BASE_URL}/book/deletecomment/${bookId}`, data)
     .then(res => {
         if(!res.ok){
             return Promise.reject(res.statusText);
