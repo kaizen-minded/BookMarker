@@ -1,4 +1,4 @@
-import  bookReducer  from './index';
+import bookReducer from './index';
 import { addNewBook } from '../actions/index';
 
 describe('bookReducer', () => {

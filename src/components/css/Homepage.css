@@ -11,10 +11,10 @@
     margin-top: 50px;
     padding: 15px;
     font-size: 2rem;
-    /* max-width: 800px; */
     width: 100%;
-    /* flex: 3; */
-    /* text-shadow: 2px 5px rgba(211, 209, 209, .75); */
+}
+.homepage-info ul{
+    list-style: none;
 }
 
 .homepage-info li{
@@ -59,14 +59,12 @@
     cursor: pointer;
 }
 .login-form, .register-form{
-    
     background: #FFFFFF;
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 @media all and (min-width: 600px){
@@ -76,5 +74,4 @@
     .homepage-register{
         flex-direction: row;
     }
-    
 }

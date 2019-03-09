@@ -4,51 +4,65 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import fetchBooksByStatus, { fetchAllBooks, updateBookStatus, removeBook } from '../actions/index'
 
-// import './Bookmarker.css';
 import './css/BookList.css';
 
+class BookList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleDeleteBook = this.handleDeleteBook.bind(this);
+        this.handleStatusUpdate = this.handleStatusUpdate.bind(this);
+    }
 
-class BookList extends React.Component{
     componentDidMount() {
         this.props.dispatch(fetchBooksByStatus(this.props.status))
     }
-    render(){
-        const handleDeleteBook = (id) => {
-            this.props.dispatch(removeBook(id));
-            this.props.dispatch(fetchAllBooks());
-        }
-        const handleStatusUpdate = (e, bookId, status) => {
-            e.preventDefault();
-            this.props.dispatch(updateBookStatus(bookId, status))
+    handleDeleteBook(id) {
+        this.props.dispatch(removeBook(id));
+        this.props.dispatch(fetchAllBooks());
+    }
+    handleStatusUpdate(e, bookId, status) {
+        e.preventDefault();
+        this.props.dispatch(updateBookStatus(bookId, status))
             .then(result => {
                 this.props.dispatch(fetchBooksByStatus(this.props.status));
                 this.props.dispatch(fetchAllBooks());
             })
-            
+
+    }
+
+    renderResults() {
+        if (this.props.loading) {
+            return <h1>Loading</h1>
+        }
+        if (this.props.error) {
+            return <strong>{this.props.goodreads.error}</strong>;
         }
         const bookdata = this.props.books.map((book, index) => {
-                return <Book 
-                 key={index}
-                 {...book} 
-                 deleteBook={handleDeleteBook} 
-                 formSubmit={handleStatusUpdate} 
-                 parent="BookList"
-                 />
-            }
+            return <Book
+                key={index}
+                {...book}
+                deleteBook={this.handleDeleteBook}
+                formSubmit={this.handleStatusUpdate}
+                parent="BookList"
+            />
+        }
         )
-    console.log(this.props)
-    return(
-        <div className="container">
-            <h1>{this.props.status}</h1>          
-            {bookdata}
-        </div>
-    )
+        return <section className="book-list" role="region">{bookdata}</section>
+    }
+
+    render() {
+        return (
+            <div className="container">
+                <h1>{this.props.status}</h1>
+                {this.renderResults()}
+            </div>
+        )
     }
 }
 const mapStateToProps = state => ({
     books: state.book.books,
-    loading: state.loading,
-    error: state.error
-} )
+    loading: state.book.loading,
+    error: state.book.error
+});
 
 export default withRouter(connect(mapStateToProps)(BookList));

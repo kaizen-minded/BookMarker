@@ -1,45 +1,32 @@
-.main-container{
-    display: flex;
-    flex-direction: column;
-    background: rgba(245, 245, 245, .4);
-}
-
 .active-book-form{
     display: flex;
-    border: 2px solid rebeccapurple;
-    /* max-height: 400px; */
     flex-direction: column;
     padding: 15px;
 }
 .book-card{
-    border: 2px solid black;
+    /* border: 2px solid black; */
     flex: 2;
     max-height: 400px;
 }
 .book-card img{
     margin: 0 auto;
     padding: 10px;
-    float: left;
+    /* float: left; */
     width: 180px;
 }
-.book-card h1{
-    font-size:2vw;
-}
+
 .comment-feed h2{
     margin: 10px;
     font-size: 1.9rem;
-    /* text-align: center; */
 }
 .comment-form{
-    width: 150px;
+    margin: 8px auto;
+    width: 220px;
 }
 .comment-form textarea{
     resize: none;
 }
 @media all and (min-width: 750px){
-    .main-container{
-        flex-direction: row;
-    }
     .active-book-form{
         flex: 1;
     }
@@ -48,17 +35,4 @@
     }
 }
 
-@media(max-width: 1580px) {
-    .book-card h1{
-      font-size: 18px;
-    }
-    .book-card h1 {
-      font-size: 1.9em; /* Fine tune unbehaved elements */
-    }
-  }
-  @media(max-width: 980px) {
-    .book-card h1 {
-      font-size: 20px;
-    }
-  }
 

@@ -1,35 +1,15 @@
-.container {
-    /* background: rgba(245, 245, 245, .6); */
-    /* margin: 20px auto; */
-    min-height: 100vh;
-    /* flex-direction: column; */
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.container h1{
-    margin: 15px auto;
-    text-align: center;
-    flex: 1 1 100%;
-    max-height: 75px;
-}
-
 .book-display{
     border-top: 3px solid royalblue;
     padding: 10px;
     text-align: left;
+    flex: 1;
 }
 
 .book-display h2{
     display: inline-block;
 }
-.book-display p{
-    /* display: inline-block; */
-}
+
 .book-cover{
-    /* display: block; */
-    /* margin: 15px auto; */
     float: left;
     width: 157px;
     margin-right: 13px;
@@ -76,12 +56,65 @@ input[type="submit"]{
     color:whitesmoke;
 }
 
+.save-btn{
+    width: 100%;
+    background: green;
+    border: none;
+    border-radius: 5px;
+    color: whitesmoke;
+    font-size: 17px;
+    padding: 4px;
+}
+
 .book-list{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
 }
 
+@media all and (min-width: 600px){
+    .container{
+        flex-direction: row;
+        flex-flow: wrap;
+    }
+    .book-list{
+        flex-direction: row;
+    }
+    .book-display{
+        margin: 15px;
+        /* max-height: 400px; */
+    }
+    .book-display h3{
+        font-size: 1em;
+    }
+    .book-display p{
+        display: inline-block;
+        margin: 5px;
+        padding: 10px;
+        border: 1px solid lightgrey;
+    }
+    .book-display button{
+        text-align: center;
+        display: block;
+        text-decoration: none;
+    }
+    .book-display a{
+        text-decoration: none;
+    }
+    .book-cover{
+        display: block;
+        margin: 15px auto;
+        float: none;
+        width: 157px;
+    }
+    .details-btn{
+        width: 100%;
+    }
+
+    .delete-btn{
+        width: 100%;
+    }
+}
 
 @media all and (min-width: 600px){
     .container{

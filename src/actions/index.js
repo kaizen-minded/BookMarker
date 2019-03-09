@@ -1,7 +1,7 @@
-import {API_BASE_URL} from '../config';
+import { API_BASE_URL } from '../config';
 
 export const FETCH_BOOK_REQUEST = 'FETCH_BOOK_REQUEST';
-export const fetchBookRequest = () =>({
+export const fetchBookRequest = () => ({
     type: FETCH_BOOK_REQUEST
 })
 
@@ -28,7 +28,7 @@ export const getAllBooks = (books) => ({
     books
 })
 export const GET_STATUS_BOOKS = "GET_STATUS_BOOKS";
-export const getStatusBooks = (books) =>({
+export const getStatusBooks = (books) => ({
     type: GET_STATUS_BOOKS,
     books
 })
@@ -55,8 +55,8 @@ export const addComment = (bookId, comment) => ({
     type: ADD_COMMENT,
     bookId,
     comment
-}) 
-export const REMOVE_COMMENT ="REMOVE_COMMENT";
+})
+export const REMOVE_COMMENT = "REMOVE_COMMENT";
 export const removeComment = (bookId, comments) => ({
     type: REMOVE_COMMENT,
     bookId,
@@ -77,7 +77,6 @@ export const fetchAllBooks = () => dispatch => {
             }
             return res.json();
         }).then(book => {
-            console.log(book)
             dispatch(getAllBooks(book));
         }).catch(err => {
             dispatch(fetchBookError(err));
@@ -85,7 +84,8 @@ export const fetchAllBooks = () => dispatch => {
 }
 
 const fetchBooksByStatus = (status) => dispatch => {
-    return fetch(`${API_BASE_URL}/book/?status=${status}`,  {
+    dispatch(fetchBookRequest())
+    return fetch(`${API_BASE_URL}/book/?status=${status}`, {
         headers: {
             "Authorization": `Bearer ${localStorage.authToken}`
         }
@@ -96,7 +96,6 @@ const fetchBooksByStatus = (status) => dispatch => {
             }
             return res.json();
         }).then(book => {
-            console.log(book)
             dispatch(getStatusBooks(book));
         }).catch(err => {
             dispatch(fetchBookError(err));
@@ -104,7 +103,7 @@ const fetchBooksByStatus = (status) => dispatch => {
 };
 
 export const fetchOneBook = (id) => dispatch => {
-    return fetch(`${API_BASE_URL}/book/${id}`,  {
+    return fetch(`${API_BASE_URL}/book/${id}`, {
         headers: {
             "Authorization": `Bearer ${localStorage.authToken}`
         }
@@ -115,7 +114,6 @@ export const fetchOneBook = (id) => dispatch => {
             }
             return res.json();
         }).then(book => {
-            console.log(book)
             dispatch(getOneBook(book));
         }).catch(err => {
             dispatch(fetchBookError(err));
@@ -123,19 +121,18 @@ export const fetchOneBook = (id) => dispatch => {
 }
 
 export const createNewBook = (newbook) => dispatch => {
-    console.log("CreateNewBook Dispatched")
     const data = {
         method: "POST",
         body: JSON.stringify(newbook),
-        headers:{
+        headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.authToken}`
-          }
+        }
     }
     return fetch(`${API_BASE_URL}/book/create`, data)
         .then(res => {
-            if(!res.ok){
+            if (!res.ok) {
                 return Promise.reject(res.statusText);
             }
             return res.json()
@@ -150,60 +147,56 @@ export const updateBookStatus = (bookId, status) => dispatch => {
         id: bookId,
         status: status
     }
-    console.log(bookUpdate)
     const data = {
         method: "PUT",
         body: JSON.stringify(bookUpdate),
-        headers:{
+        headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.authToken}`
-          }
+        }
     }
     return fetch(`${API_BASE_URL}/book/updatebookstatus/${bookId}`, data)
         .then(res => {
-            if(!res.ok){
+            if (!res.ok) {
                 return Promise.reject(res.statusText);
             }
             return res.json()
         })
         .then(newStatus => {
-            let {status, bookId} = newStatus.message
-            console.log(status, bookId)
+            let { status, bookId } = newStatus.message;
             dispatch(updateStatus(status, bookId))
         })
 }
 
 export const removeBook = (bookId) => dispatch => {
-    console.log("delete Dispatched");
     const deleteTargetBook = {
         id: bookId
     }
     const data = {
         method: "DELETE",
         body: JSON.stringify(deleteTargetBook),
-        headers:{
+        headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.authToken}`
-          }
+        }
     }
     fetch(`${API_BASE_URL}/book/deletebook/${bookId}`, data)
         .then(res => {
-            if(!res.ok){
+            if (!res.ok) {
                 return Promise.reject(res.statusText);
             }
             return res.json()
         })
         .then(newStatus => {
-            let {bookId} = newStatus
-            console.log(bookId)
-            dispatch(deleteBook(bookId))
+            let { bookId } = newStatus;
+            dispatch(deleteBook(bookId));
         })
 }
 
 export const addNoteToBook = (bookId, bookmarkPage, comment) => dispatch => {
-    const newComment= {
+    const newComment = {
         id: bookId,
         bookmarkPage: bookmarkPage,
         comment: comment
@@ -211,15 +204,15 @@ export const addNoteToBook = (bookId, bookmarkPage, comment) => dispatch => {
     const data = {
         method: "POST",
         body: JSON.stringify(newComment),
-        headers:{
+        headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.authToken}`
-          }
+        }
     }
     return fetch(`${API_BASE_URL}/book/addcomment/${bookId}`, data)
         .then(res => {
-            if(!res.ok){
+            if (!res.ok) {
                 return Promise.reject(res.statusText);
             }
             return res.json()
@@ -230,8 +223,7 @@ export const addNoteToBook = (bookId, bookmarkPage, comment) => dispatch => {
         })
 }
 
-export const removeNoteFromBook =(bookId, commentId) => dispatch => {
-    console.log("[Action Index] removeNoteFromBook");
+export const removeNoteFromBook = (bookId, commentId) => dispatch => {
     const targetComment = {
         bookId: bookId,
         commentId: commentId
@@ -239,25 +231,23 @@ export const removeNoteFromBook =(bookId, commentId) => dispatch => {
     const data = {
         method: "DELETE",
         body: JSON.stringify(targetComment),
-        headers:{
+        headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.authToken}`
-          }
+        }
     }
     return fetch(`${API_BASE_URL}/book/deletecomment/${bookId}`, data)
-    .then(res => {
-        if(!res.ok){
-            return Promise.reject(res.statusText);
-        }
-        return res.json()
-    })
-    .then(updatedComments => {
-        const comment = updatedComments.commentInfo
-        console.log("[Action Index] response from fetch", comment.notes);
-        // dispatch(addComment(bookId, comment))
-        dispatch(removeComment(bookId, comment.notes))
-    })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json()
+        })
+        .then(updatedComments => {
+            const comment = updatedComments.commentInfo
+            dispatch(removeComment(bookId, comment.notes))
+        })
 }
 
 export default fetchBooksByStatus

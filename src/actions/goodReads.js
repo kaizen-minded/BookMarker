@@ -1,7 +1,7 @@
-import {API_BASE_URL} from '../config';
+import { API_BASE_URL } from '../config';
 
 export const FETCH_GOODREADS_REQUEST = 'FETCH_GOODREADS_REQUEST';
-export const fetchGoodReadsRequest = () =>({
+export const fetchGoodReadsRequest = () => ({
     type: FETCH_GOODREADS_REQUEST
 })
 
@@ -18,7 +18,8 @@ export const fetchGoodReadsError = error => ({
 })
 
 const fetchGoodreads = (userBook) => dispatch => {
-    fetch(`${API_BASE_URL}/book/search/${userBook}`, {
+    dispatch(fetchGoodReadsRequest());
+    return fetch(`${API_BASE_URL}/book/search/${userBook}`, {
         headers: {
             "Authorization": `Bearer ${localStorage.authToken}`
         }
@@ -28,7 +29,6 @@ const fetchGoodreads = (userBook) => dispatch => {
         }
         return res.json();
     }).then(bookResults => {
-        console.log(bookResults)
         dispatch(fetchGoodReadsSuccess(bookResults));
     }).catch(err => {
         dispatch(fetchGoodReadsError(err));

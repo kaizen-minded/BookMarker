@@ -1,10 +1,9 @@
-import {SubmissionError} from 'redux-form';
+import { SubmissionError } from 'redux-form';
 
-import {API_BASE_URL} from '../config';
-import {normalizeResponseErrors} from './utils';
+import { API_BASE_URL } from '../config';
+import { normalizeResponseErrors } from './utils';
 
 export const registerUser = user => dispatch => {
-    //most likely have to change API_BASE_URL
     return fetch(`${API_BASE_URL}/register`, {
         method: 'POST',
         headers: {
@@ -15,9 +14,8 @@ export const registerUser = user => dispatch => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .catch(err => {
-            const {reason, message, location} = err;
+            const { reason, message, location } = err;
             if (reason === 'ValidationError') {
-                // Convert ValidationErrors into SubmissionErrors for Redux Form
                 return Promise.reject(
                     new SubmissionError({
                         [location]: message

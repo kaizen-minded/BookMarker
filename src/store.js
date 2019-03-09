@@ -9,8 +9,7 @@ import protectedDataReducer from './reducers/protected-data';
 import { setAuthToken, refreshAuthToken } from './actions/auth';
 
 const enhancers = compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(thunk)
 )
 
 const store = createStore(combineReducers({

@@ -6,12 +6,13 @@ import fetchGoodreads from '../actions/goodReads';
 import store from '../store';
 
 import './css/SearchBooks.css';
+import './css/BookCards.css';
 
 class SearchBooks extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            userSearch : ""
+            userSearch: ""
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,19 +22,31 @@ class SearchBooks extends React.Component {
             userSearch: e.target.value
         });
     }
-    handleSubmit(e){
+    handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state.userSearch)
         store.dispatch(fetchGoodreads(this.state.userSearch));
+        this.setState({
+            userSearch: ""
+        });
     }
 
-    render(){
-        return(
+    renderResults() {
+        if (this.props.goodreads.loading) {
+            return <h1>Loading</h1>
+        }
+        if (this.props.error) {
+            return <strong>{this.props.goodreads.error}</strong>;
+        }
+        return <SearchList {...this.props.goodreads} />
+    }
+
+    render() {
+        return (
             <section className="container" role="region">
-                <SearchForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} value={this.state.userSearch}/>
-                <SearchList {...this.props.goodreads}/>
+                <SearchForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} value={this.state.userSearch} />
+                {this.renderResults()}
             </section>
-            
+
         )
     }
 }

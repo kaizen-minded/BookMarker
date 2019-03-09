@@ -7,8 +7,7 @@ import './css/Homepage.css';
 
 
 const Homepage = (props) => {
-    console.log(props)
-    return(
+    return (
         <div>
             <header role="banner">
                 <NavBar />
@@ -26,11 +25,8 @@ const Homepage = (props) => {
                     <RegistrationPage />
                     <LoginForm />
                 </section>
-                
             </main>
         </div>
-
-
     )
 }
 

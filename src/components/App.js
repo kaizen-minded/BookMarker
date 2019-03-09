@@ -36,23 +36,23 @@ class App extends Component {
 
   render() {
 
-    const PrivateRoute = ({component: Component, ...rest}) => {
+    const PrivateRoute = ({ component: Component, ...rest }) => {
       return <Route {...rest} render={(props) => (
         this.props.user !== null
           ? <Component {...props} routes={this.state.routes} />
           : <Redirect to='/' />
       )}
       />
-      }
+    }
 
     return (
       <Provider store={store}>
         <Router>
-        <div>
+          <div>
             <Route exact path="/" component={Homepage} />
             <Route path='/login' component={LoginForm} />
-            <PrivateRoute path="/view" component={Dashboard}/>
-        </div>    
+            <PrivateRoute path="/view" component={Dashboard} />
+          </div>
         </Router>
       </Provider>
     );

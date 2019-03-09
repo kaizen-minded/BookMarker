@@ -22,11 +22,11 @@ const initialState = {
     loading: false,
     error: null,
     books: [],
-    oneBook:{},
+    oneBook: {},
     bookCount: {}
 }
 
-export default function bookReducer (state=initialState, action){
+export default function bookReducer(state = initialState, action) {
     if (action.type === FETCH_BOOK_REQUEST) {
         return Object.assign({}, state, {
             loading: true,
@@ -46,29 +46,29 @@ export default function bookReducer (state=initialState, action){
             error: null
         });
     }
-    else if (action.type === GET_STATUS_BOOKS){
+    else if (action.type === GET_STATUS_BOOKS) {
         return Object.assign({}, state, {
             books: action.books,
             loading: false,
             error: null
         })
     }
-    else if (action.type === GET_ONE_BOOK){
+    else if (action.type === GET_ONE_BOOK) {
         return Object.assign({}, state, {
             oneBook: action.oneBook,
             loading: false,
             error: null
         })
     }
-    else if(action.type === ADD_BOOK){
+    else if (action.type === ADD_BOOK) {
         return Object.assign({}, state, {
-            books: [ ...state.books, action.newBook ]
+            books: [...state.books, action.newBook]
         })
     }
-    else if (action.type === UPDATE_STATUS){
+    else if (action.type === UPDATE_STATUS) {
         return Object.assign({}, state, {
             books: state.books.map(book => {
-                if(book.bookId === action.bookId){
+                if (book.bookId === action.bookId) {
                     return {
                         ...book,
                         status: action.status
@@ -78,26 +78,24 @@ export default function bookReducer (state=initialState, action){
             })
         })
     }
-    else if (action.type === DELETE_BOOK){
-        console.log("REACHED DELETE REDUCERS")
+    else if (action.type === DELETE_BOOK) {
         return Object.assign({}, state, {
             books: state.books.filter(({ bookId }) => bookId !== action.bookId)
         })
     }
-    else if (action.type === GET_ALL_BOOKS){
+    else if (action.type === GET_ALL_BOOKS) {
         return Object.assign({}, state, {
             bookCount: {
-                wishlist: action.books.filter(({status}) => status === "Wishlist").length,
-                current: action.books.filter(({status}) => status === "Current").length,
-                completed: action.books.filter(({status}) => status === "Completed").length
+                wishlist: action.books.filter(({ status }) => status === "Wishlist").length,
+                current: action.books.filter(({ status }) => status === "Current").length,
+                completed: action.books.filter(({ status }) => status === "Completed").length
             }
         })
     }
-    else if(action.type === ADD_COMMENT){
-        console.log("[ADD_COMMENT Reducer]")
+    else if (action.type === ADD_COMMENT) {
         return Object.assign({}, state, {
             books: state.books.map(book => {
-                if(book.bookId === action.bookId){
+                if (book.bookId === action.bookId) {
                     return {
                         ...book,
                         notes: [action.comment, ...book.notes]
@@ -108,11 +106,10 @@ export default function bookReducer (state=initialState, action){
         })
 
     }
-    else if(action.type ===  REMOVE_COMMENT){
-        console.log("[REMOVE_COMMENT Reducer]")
+    else if (action.type === REMOVE_COMMENT) {
         return Object.assign({}, state, {
             books: state.books.map(book => {
-                if(book.bookId === action.bookId){
+                if (book.bookId === action.bookId) {
                     return {
                         ...book,
                         notes: [action.comments]
@@ -121,12 +118,10 @@ export default function bookReducer (state=initialState, action){
                 return book
             })
         })
-
     }
-
     return state;
 }
-export function goodreadsReducer (state=initialState, action){
+export function goodreadsReducer(state = initialState, action) {
     if (action.type === FETCH_GOODREADS_REQUEST) {
         return Object.assign({}, state, {
             loading: true,

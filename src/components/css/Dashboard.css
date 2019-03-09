@@ -1,0 +1,21 @@
+.App {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.main-container{
+    display: flex;
+    flex-direction: column;
+    background: rgba(245, 245, 245, .4);
+    width: 100%;
+}
+
+@media all and (min-width: 600px){
+    .main-container{
+        flex-direction: row;
+        flex: 3;
+    }
+    .aside-container{
+        flex: 1;
+    }
+}
