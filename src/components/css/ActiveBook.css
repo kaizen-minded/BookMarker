@@ -4,14 +4,12 @@
     padding: 15px;
 }
 .book-card{
-    /* border: 2px solid black; */
     flex: 2;
     max-height: 400px;
 }
 .book-card img{
     margin: 0 auto;
     padding: 10px;
-    /* float: left; */
     width: 180px;
 }
 

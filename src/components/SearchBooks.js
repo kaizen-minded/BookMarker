@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from 'react-spinkit';
 import SearchForm from './SearchForm';
 import SearchList from './SearchList'
 import { connect } from 'react-redux';
@@ -32,7 +33,7 @@ class SearchBooks extends React.Component {
 
     renderResults() {
         if (this.props.goodreads.loading) {
-            return <h1>Loading</h1>
+            return <Spinner spinnerName="circle" noFadeIn />
         }
         if (this.props.error) {
             return <strong>{this.props.goodreads.error}</strong>;

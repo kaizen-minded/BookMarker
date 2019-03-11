@@ -2,6 +2,7 @@ import React from 'react';
 import Book from './Book';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Spinner from 'react-spinkit';
 import fetchBooksByStatus, { fetchAllBooks, updateBookStatus, removeBook } from '../actions/index'
 
 import './css/BookList.css';
@@ -32,7 +33,7 @@ class BookList extends React.Component {
 
     renderResults() {
         if (this.props.loading) {
-            return <h1>Loading</h1>
+            return <Spinner spinnerName="circle" noFadeIn />
         }
         if (this.props.error) {
             return <strong>{this.props.goodreads.error}</strong>;

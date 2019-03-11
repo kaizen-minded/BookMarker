@@ -84,7 +84,5 @@ nav li:hover {
     }
     #nav-toggle:checked ~ .right-menu{
         display: block;
-        /* display: grid;
-        grid-row: 2; */
     }
 }

@@ -1,8 +1,5 @@
 .container {
-    /* background: rgba(245, 245, 245, .6); */
-    /* margin: 20px auto; */
     min-height: 100vh;
-    /* flex-direction: column; */
     width: 100%;
     flex-wrap: wrap;
     justify-content: center;
@@ -19,17 +16,14 @@
     border-top: 3px solid royalblue;
     padding: 10px;
     text-align: left;
+    max-width: 100%;
 }
 
 .book-display h2{
     display: inline-block;
 }
-.book-display p{
-    /* display: inline-block; */
-}
+
 .book-cover{
-    /* display: block; */
-    /* margin: 15px auto; */
     float: left;
     width: 157px;
     margin-right: 13px;
@@ -90,7 +84,8 @@ input[type="submit"]{
     }
     .book-display{
         margin: 15px;
-        /* max-height: 400px; */
+        flex: 1 33.3333333%;
+        max-width: 300px;
     }
     .book-display h3{
         font-size: 1em;

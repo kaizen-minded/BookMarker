@@ -1,13 +1,10 @@
 .search-goodreads{
-    /* color: red; */
     height: 133px;
     margin-top: 29px;
     font-size: 2em;
     margin-bottom: 29px;
 }
-/* .search-header h1{
-    font-size: 1.7em;
-} */
+
 .search-goodreads input{
     border: 0;
     outline: 0;
