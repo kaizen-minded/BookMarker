@@ -4,9 +4,16 @@ import { Link } from 'react-router-dom';
 class Book extends React.Component {
 
     render() {
+        let title;
+        if(this.props.title.length > 25){
+            title = this.props.title.substring(0, 25)
+        }
+        else{
+            title = this.props.title
+        }
         const mainContent = (
             <React.Fragment>
-                <h2>{this.props.title}</h2>
+                <h2>{title}</h2>
                 <img className="book-cover" src={this.props.bookCover} alt={`Book cover for ${this.props.bookCover}`} />
             </React.Fragment>
         )
