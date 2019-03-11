@@ -5,8 +5,8 @@ class Book extends React.Component {
 
     render() {
         let title;
-        if(this.props.title.length > 25){
-            title = this.props.title.substring(0, 25)
+        if(this.props.title.length > 35){
+            title = `${this.props.title.substring(0, 35)}...`
         }
         else{
             title = this.props.title

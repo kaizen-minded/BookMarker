@@ -2,17 +2,22 @@
     border-top: 3px solid royalblue;
     padding: 10px;
     text-align: left;
-    flex: 1;
+    flex: 1 1 25%;
 }
 
 .book-display h2{
     display: inline-block;
+    height: 62px;
 }
 
 .book-cover{
     float: left;
     width: 157px;
     margin-right: 13px;
+    display: block;
+    margin: 15px auto;
+    float: none;
+    height: 250px;
 }
 
 .book-display h3 {
@@ -79,6 +84,7 @@ input[type="submit"]{
     }
     .book-list{
         flex-direction: row;
+        justify-content: space-around;
     }
     .book-display{
         margin: 15px;
@@ -100,12 +106,7 @@ input[type="submit"]{
     .book-display a{
         text-decoration: none;
     }
-    .book-cover{
-        display: block;
-        margin: 15px auto;
-        float: none;
-        width: 157px;
-    }
+
     .details-btn{
         width: 100%;
     }
@@ -145,6 +146,7 @@ input[type="submit"]{
         margin: 15px auto;
         float: none;
         width: 157px;
+        height: 250px;
     }
     .details-btn{
         width: 100%;
